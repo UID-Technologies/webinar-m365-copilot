@@ -81,7 +81,7 @@ flowchart TB
     L2 -.-> SK8["Responsible AI guardrails"]
 ```
 
-Lab 01 teaches a **consulting workflow** using Copilot Chat and Pages. Lab 02 extends that foundation into **persistent, reusable agents** with configured knowledge and guardrails. Together, they cover the two most common enterprise Copilot patterns: ad-hoc analysis with interactive output, and governed agent-based intelligence.
+Lab 01 teaches a **six-phase consulting workflow** (Discover → Ground → Design → Build → Validate → Communicate) using Copilot Chat and Pages. Lab 02 extends that foundation with a **six-phase agent lifecycle** (Initialize → Configure → Test Core → Test Extended → Test Guardrails → Validate & Deliver) using Agent Builder. Together, they cover the two most common enterprise Copilot patterns: ad-hoc analysis with interactive output, and governed agent-based intelligence.
 
 ---
 

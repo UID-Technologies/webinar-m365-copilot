@@ -14,9 +14,7 @@
 
 In this hands-on lab, you use **Microsoft 365 Copilot** to turn business requirements and finance transformation data into an interactive **Finance Transformation Decision Center**.
 
-You work as a business consultant supporting a finance transformation program. Instead of immediately asking Copilot to generate a solution, you follow a structured consulting workflow:
-
-**Understand Requirements → Inspect Data → Analyze → Design → Build → Test → Refine → Validate → Communicate**
+You work as a business consultant supporting a finance transformation program. Instead of immediately asking Copilot to generate a solution, you follow a **six-phase consulting workflow**—each phase maps to one or more exercises in this lab.
 
 You learn how to use natural-language prompts with Microsoft 365 Copilot without writing application code. The final solution gives leadership an executive overview, initiative portfolio, prioritization information, roadmap, and data-quality information aligned with the supplied Business Requirements Document (BRD).
 
@@ -159,27 +157,100 @@ You will also produce a short **CFO Executive Brief**.
 
 ## Lab Workflow
 
-The lab follows a structured consulting workflow from requirement to communication:
+The lab follows a structured consulting workflow from requirement to communication. Work through **six phases** in order—do not skip to building until you have grounded the requirement in source data.
+
+### Workflow at a Glance
+
+| Phase | Focus | Exercises | Copilot Tool |
+|:-----:|-------|:---------:|:------------:|
+| **1** | Discover & Understand | 1–2 | Copilot Chat |
+| **2** | Ground & Analyze | 3–5 | Copilot Chat |
+| **3** | Design | 6 | Copilot Chat |
+| **4** | Build & Iterate | 7–9 | Chat + Pages |
+| **5** | Validate | 10 | Copilot Chat |
+| **6** | Communicate | 11 | Copilot Chat |
+
+### End-to-End Workflow
 
 ```mermaid
-flowchart LR
-    A[Business Requirement] --> B[Understand BRD]
-    B --> C[Ground with Data]
-    C --> D[Analyze]
-    D --> E[Identify Gaps]
-    E --> F[Design]
-    F --> G[Generate Page]
-    G --> H[Preview]
-    H --> I[Test]
-    I --> J[Refine]
-    J --> K[Validate]
-    K --> L[Communicate]
+flowchart TB
+    START(["Start Lab"]) --> P1
 
-    style A fill:#e8f4fd
-    style G fill:#d4edda
-    style K fill:#fff3cd
-    style L fill:#f8d7da
+    subgraph P1["Phase 1 — Discover & Understand"]
+        direction LR
+        A["Business Requirement<br/><i>Supplied BRD</i>"]
+        B["Understand BRD<br/><b>Ex 1</b>"]
+        C["Requirements Checklist<br/><b>Ex 2</b>"]
+        A --> B --> C
+    end
+
+    P1 --> CP1{{"Checkpoint:<br/>Requirement clear?"}}
+    CP1 --> P2
+
+    subgraph P2["Phase 2 — Ground & Analyze"]
+        direction LR
+        D["Ground with Data<br/><b>Ex 3</b>"]
+        E["Analyze Portfolio<br/><b>Ex 4</b>"]
+        F["Identify Gaps<br/><i>Facts · Observations · Gaps</i>"]
+        G["Challenge Copilot<br/><b>Ex 5</b>"]
+        D --> E --> F --> G
+    end
+
+    P2 --> CP2{{"Checkpoint:<br/>Data mapped to BRD?"}}
+    CP2 --> P3
+
+    subgraph P3["Phase 3 — Design"]
+        H["Design Decision Center<br/><b>Ex 6</b>"]
+    end
+
+    P3 --> CP3{{"Checkpoint:<br/>Structure approved?"}}
+    CP3 --> P4
+
+    subgraph P4["Phase 4 — Build & Iterate"]
+        direction TB
+        I["Generate Page<br/><b>Ex 7</b>"]
+        J["Preview<br/><b>Ex 8</b>"]
+        K["Test<br/><i>Search · Filter · Sort · Details</i>"]
+        L["Refine with Prompts<br/><b>Ex 9</b>"]
+        I --> J --> K --> L
+        L -.->|"Iterate until satisfied"| J
+    end
+
+    P4 --> P5
+
+    subgraph P5["Phase 5 — Validate"]
+        M["Validate Against BRD<br/><b>Ex 10</b>"]
+    end
+
+    P5 --> P6
+
+    subgraph P6["Phase 6 — Communicate"]
+        N["CFO Executive Brief<br/><b>Ex 11</b>"]
+    end
+
+    P6 --> END(["Lab Complete"])
+
+    style START fill:#e8f4fd
+    style P4 fill:#d4edda
+    style P5 fill:#fff3cd
+    style END fill:#f8d7da
+    style CP1 fill:#ffffff,stroke:#666
+    style CP2 fill:#ffffff,stroke:#666
+    style CP3 fill:#ffffff,stroke:#666
 ```
+
+### Phase Summary
+
+| Phase | What You Do | Why It Matters |
+|:-----:|-------------|----------------|
+| **1 · Discover** | Read the BRD and create a requirements checklist | Ensures Copilot understands the business problem before any building |
+| **2 · Ground** | Add the dataset, analyze it, and challenge unsupported conclusions | Prevents AI from inventing costs, dates, or priorities not in source data |
+| **3 · Design** | Define the information architecture for leadership | A clear design produces a better first generation than a vague "build an app" prompt |
+| **4 · Build** | Generate the Copilot Page, preview, test, and refine | Uses the **Generate → Preview → Evaluate → Refine** pattern without code |
+| **5 · Validate** | Compare the prototype against the original BRD | Acceptance review catches gaps before the output reaches stakeholders |
+| **6 · Communicate** | Produce a one-page CFO executive brief | Turns the interactive prototype into actionable leadership communication |
+
+> **Trainer tip:** The dotted loop in Phase 4 is intentional—learners should refine at least twice before validating. Rushing to "build first" is the most common mistake in this lab.
 
 ---
 
@@ -710,8 +781,31 @@ Before completing the lab, confirm each item:
 
 ## Key Takeaways
 
-You followed an end-to-end business consulting workflow:
+You followed a six-phase consulting workflow:
 
-**Business Requirement → Understand → Ground with Data → Analyze → Identify Gaps → Design → Generate → Preview → Test → Refine → Validate → Communicate**
+```mermaid
+flowchart LR
+    P1["1 · Discover"] --> P2["2 · Ground"]
+    P2 --> P3["3 · Design"]
+    P3 --> P4["4 · Build"]
+    P4 --> P5["5 · Validate"]
+    P5 --> P6["6 · Communicate"]
+
+    P4 -.->|"Refine loop"| P4
+
+    style P1 fill:#e8f4fd
+    style P4 fill:#d4edda
+    style P5 fill:#fff3cd
+    style P6 fill:#f8d7da
+```
+
+| Phase | Core Lesson |
+|:-----:|-------------|
+| **Discover** | Understand the requirement before asking Copilot to build |
+| **Ground** | Attach source data early; separate facts from observations |
+| **Design** | Design the solution structure before generation |
+| **Build** | Generate, preview, test, and refine—without writing code |
+| **Validate** | Compare output against the original BRD acceptance criteria |
+| **Communicate** | Turn analysis into executive-ready communication |
 
 > **The quality of AI-assisted work depends not only on the prompt, but also on the quality of the context, source information, validation, and human judgment.**

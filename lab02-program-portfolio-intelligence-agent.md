@@ -25,6 +25,8 @@ The agent helps program and portfolio teams consolidate information from approve
 
 The agent must preserve source facts and clearly distinguish them from generated observations or proposed actions.
 
+You follow a **six-phase agent-building lifecycle**—each phase maps to one or more exercises in this lab. Configure instructions and knowledge **before** testing; the guardrail exercises in Phase 5 only work if Phases 1–2 are done correctly.
+
 ---
 
 ## Learning Objectives
@@ -215,28 +217,112 @@ flowchart TB
 
 ---
 
-## Agent Building Lifecycle
+## Lab Workflow
 
-This lab follows a complete agent-building lifecycle from requirement to human review:
+The lab follows a structured agent-building lifecycle from requirement to human review. Work through **six phases** in order—do not run governance tests until instructions and knowledge sources are fully configured.
+
+### Workflow at a Glance
+
+| Phase | Focus | Exercises | Agent Builder Area |
+|:-----:|-------|:---------:|:------------------:|
+| **1** | Initialize | 1–2 | Agent creation |
+| **2** | Configure | 3–6 | Identity, instructions, knowledge, prompts |
+| **3** | Test Core Governance | 7–11 | Agent chat (status, RAID, actions) |
+| **4** | Test Extended Scenarios | 12–13 | Agent chat (dependencies, financials) |
+| **5** | Test Guardrails | 14–17 | Agent chat (edge cases & responsible AI) |
+| **6** | Validate & Deliver | 18–19 | Validation matrix + governance brief |
+
+### End-to-End Workflow
 
 ```mermaid
-flowchart LR
-    A[Business Requirement] --> B[Define Agent Purpose]
-    B --> C[Configure Instructions]
-    C --> D[Connect Knowledge]
-    D --> E[Ground Responses]
-    E --> F[Test Scenarios]
-    F --> G[Test Missing Data]
-    G --> H[Test Conflicts]
-    H --> I[Test Responsible AI]
-    I --> J[Governance Output]
-    J --> K[Human Review]
+flowchart TB
+    START(["Start Lab"]) --> P1
 
-    style A fill:#e8f4fd
-    style D fill:#d4edda
-    style I fill:#fff3cd
-    style K fill:#f8d7da
+    subgraph P1["Phase 1 — Initialize"]
+        direction LR
+        A["Open Agent Builder<br/><b>Ex 1</b>"]
+        B["Describe Agent Purpose<br/><b>Ex 2</b>"]
+        A --> B
+    end
+
+    P1 --> P2
+
+    subgraph P2["Phase 2 — Configure"]
+        direction LR
+        C["Agent Identity<br/><b>Ex 3</b>"]
+        D["Agent Instructions<br/><b>Ex 4</b>"]
+        E["Knowledge Sources<br/><b>Ex 5</b>"]
+        F["Suggested Prompts<br/><b>Ex 6</b>"]
+        C --> D --> E --> F
+    end
+
+    P2 --> CP1{{"Checkpoint:<br/>Instructions & knowledge<br/>configured?"}}
+    CP1 --> P3
+
+    subgraph P3["Phase 3 — Test Core Governance"]
+        direction TB
+        G["Grounded Q&A<br/><b>Ex 7</b>"]
+        H["Steering Committee Brief<br/><b>Ex 8</b>"]
+        I["RAID Intelligence<br/><b>Ex 9</b>"]
+        J["Overdue Actions<br/><b>Ex 10</b>"]
+        K["Action Reminder Draft<br/><b>Ex 11</b>"]
+        G --> H --> I --> J --> K
+    end
+
+    P3 --> P4
+
+    subgraph P4["Phase 4 — Test Extended Scenarios"]
+        direction LR
+        L["Dependencies<br/><b>Ex 12</b>"]
+        M["Financial Information<br/><b>Ex 13</b>"]
+        L --> M
+    end
+
+    P4 --> P5
+
+    subgraph P5["Phase 5 — Test Guardrails"]
+        direction TB
+        N["Missing Information<br/><b>Ex 14</b>"]
+        O["Conflicting Sources<br/><b>Ex 15</b>"]
+        P["Proposed Actions<br/><b>Ex 16</b>"]
+        Q["Responsible AI<br/><b>Ex 17</b>"]
+        N --> O --> P --> Q
+    end
+
+    P5 --> CP2{{"Checkpoint:<br/>Guardrails passing?"}}
+    CP2 -->|"Adjust instructions<br/>or knowledge"| P2
+    CP2 --> P6
+
+    subgraph P6["Phase 6 — Validate & Deliver"]
+        direction LR
+        R["Validation Matrix<br/><b>Ex 18</b>"]
+        S["Governance Brief<br/><b>Ex 19</b>"]
+        T["Human Review<br/><i>Final Review section</i>"]
+        R --> S --> T
+    end
+
+    P6 --> END(["Lab Complete"])
+
+    style START fill:#e8f4fd
+    style P2 fill:#d4edda
+    style P5 fill:#fff3cd
+    style END fill:#f8d7da
+    style CP1 fill:#ffffff,stroke:#666
+    style CP2 fill:#ffffff,stroke:#666
 ```
+
+### Phase Summary
+
+| Phase | What You Do | Why It Matters |
+|:-----:|-------------|----------------|
+| **1 · Initialize** | Open Agent Builder and describe the agent in natural language | Establishes purpose before configuration details |
+| **2 · Configure** | Set identity, instructions, knowledge sources, and starter prompts | Instructions and approved knowledge define agent behavior—not the chat interface alone |
+| **3 · Test Core** | Verify status, RAID, overdue actions, and reminder drafts | Confirms the agent produces source-backed governance outputs for everyday PMO tasks |
+| **4 · Test Extended** | Verify dependencies and financial summaries | Tests cross-source consolidation while preserving currency, period, and recorded values |
+| **5 · Test Guardrails** | Deliberately probe missing data, conflicts, proposed actions, and people-ranking | Validates that guardrails work under pressure—not just on easy questions |
+| **6 · Validate & Deliver** | Run the full validation matrix and produce the governance brief | Ensures the agent is ready for human-reviewed program use |
+
+> **Trainer tip:** The dotted loop from Phase 5 back to Phase 2 is intentional. If guardrail tests fail, learners should refine **instructions** or verify **knowledge sources**—not keep re-prompting the same way in chat.
 
 ---
 
@@ -723,9 +809,33 @@ Before accepting the governance brief, verify:
 
 ## Key Takeaways
 
-In this lab, you followed a complete agent-building lifecycle:
+You followed a six-phase agent-building lifecycle:
 
-**Business Requirement → Define Agent Purpose → Configure Instructions → Connect Approved Knowledge → Ground Responses → Test Business Scenarios → Test Missing Information → Test Conflicting Information → Test Responsible AI → Generate Governance Output → Human Review**
+```mermaid
+flowchart LR
+    P1["1 · Initialize"] --> P2["2 · Configure"]
+    P2 --> P3["3 · Test Core"]
+    P3 --> P4["4 · Test Extended"]
+    P4 --> P5["5 · Test Guardrails"]
+    P5 --> P6["6 · Validate"]
+    P6 --> END(["Deliver"])
+
+    P5 -.->|"Fix instructions<br/>or knowledge"| P2
+
+    style P1 fill:#e8f4fd
+    style P2 fill:#d4edda
+    style P5 fill:#fff3cd
+    style END fill:#f8d7da
+```
+
+| Phase | Core Lesson |
+|:-----:|-------------|
+| **Initialize** | Describe agent purpose in business language before configuring details |
+| **Configure** | Instructions + approved knowledge define behavior—not documents alone |
+| **Test Core** | Verify everyday governance outputs (status, RAID, actions) are source-backed |
+| **Test Extended** | Confirm cross-source consolidation preserves recorded values and periods |
+| **Test Guardrails** | Deliberately break the agent with edge cases before production use |
+| **Validate & Deliver** | Run a structured test matrix, then produce a human-reviewed governance brief |
 
 > **A useful enterprise agent is not simply a chatbot with documents attached.**
 
